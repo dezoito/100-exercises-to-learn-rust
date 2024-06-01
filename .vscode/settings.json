@@ -1,0 +1,18 @@
+{
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#250fee"
+  },
+  // "rust-analyzer.linkedProjects": [
+  //   "./src-tauri/Cargo.toml",
+  //   "./old/Cargo.toml"
+  // ],
+  "rust-analyzer.showUnlinkedFileNotification": false,
+  "rust-analyzer.check.command": "clippy",
+  "[rust]": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true
+  },
+  // Ignore @tailwind warnings
+  "css.lint.unknownAtRules": "ignore",
+  "editor.fontSize": 14,
+}
