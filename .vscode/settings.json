@@ -2,10 +2,9 @@
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#250fee"
   },
-  // "rust-analyzer.linkedProjects": [
-  //   "./src-tauri/Cargo.toml",
-  //   "./old/Cargo.toml"
-  // ],
+  "rust-analyzer.linkedProjects": [
+    "${workspaceFolder}/exercises/02_basic_calculator/01_integers/Cargo.toml",
+  ],
   "rust-analyzer.showUnlinkedFileNotification": false,
   "rust-analyzer.check.command": "clippy",
   "[rust]": {
