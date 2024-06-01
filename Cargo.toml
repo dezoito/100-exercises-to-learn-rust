@@ -1,3 +1,7 @@
 [workspace]
 members = ["exercises/*/*", "helpers/common", "helpers/mdbook-exercise-linker", "helpers/ticket_fields"]
 resolver = "2"
+
+# see exercises/02_basic_calculator/08_overflow/src/lib.rs
+[profile.dev]
+overflow-checks = false
