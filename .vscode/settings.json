@@ -4,6 +4,7 @@
   },
   "rust-analyzer.linkedProjects": [
     "${workspaceFolder}/exercises/02_basic_calculator/01_integers/Cargo.toml",
+    "${workspaceFolder}/exercises/03_ticket_v1/02_validation/Cargo.toml",
   ],
   "rust-analyzer.showUnlinkedFileNotification": false,
   "rust-analyzer.check.command": "clippy",
