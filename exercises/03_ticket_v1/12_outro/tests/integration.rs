@@ -1,4 +1,4 @@
-use outro_02::Order;
+use outro_02::Order; // outro_02 is the name of the project
 
 // Files inside the `tests` directory are only compiled when you run tests.
 // As a consequence, we don't need the `#[cfg(test)]` attribute for conditional compilation—it's
