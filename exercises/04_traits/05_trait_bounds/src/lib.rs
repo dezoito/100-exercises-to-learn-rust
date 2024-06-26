@@ -5,8 +5,15 @@
 // different _semantics_. We'll cover those differences later in the course when we talk about ordered
 // collections (e.g. BTreeMap).
 
+// We use ord to implement < or > comparisons
+use std::cmp::Ord;
+
 /// Return the minimum of two values.
-pub fn min<T>(left: T, right: T) -> T {
+pub fn min<T>(left: T, right: T) -> T
+// implement the trait bound for T
+where
+    T: Ord,
+{
     if left <= right {
         left
     } else {
