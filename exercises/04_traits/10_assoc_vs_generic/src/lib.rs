@@ -16,6 +16,10 @@
 // associated type EXP defaults to Self if no explicit
 // type is provided when implementing the trait for a
 // particular type.
+//
+// In Rust traits, an associated type (type Output; in this case)
+//  serves as a placeholder for a type that will be specified
+// by types implementing the trait.
 pub trait Power<EXP = Self> {
     type Output;
     fn power(&self, exp: EXP) -> Self::Output;
