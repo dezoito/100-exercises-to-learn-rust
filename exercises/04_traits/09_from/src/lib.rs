@@ -5,6 +5,7 @@ pub struct WrappingU32 {
 }
 
 // Suggested implementation
+// You accept a value (value: u32) and return the constructed struct
 impl From<u32> for WrappingU32 {
     fn from(value: u32) -> Self {
         WrappingU32 { value }

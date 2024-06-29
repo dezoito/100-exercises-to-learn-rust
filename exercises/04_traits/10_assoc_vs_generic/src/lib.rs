@@ -13,6 +13,40 @@
 // You don't have to though: it's perfectly okay to write three separate
 // implementations manually. Venture further only if you're curious.
 
+// associated type EXP defaults to Self if no explicit
+// type is provided when implementing the trait for a
+// particular type.
+pub trait Power<EXP = Self> {
+    type Output;
+    fn power(&self, exp: EXP) -> Self::Output;
+}
+
+// When the exponent is in u16
+impl Power<u16> for u32 {
+    type Output = u32;
+
+    fn power(&self, exp: u16) -> u32 {
+        self.pow(exp.into())
+    }
+}
+
+// When exp is u32, we don't need into()
+impl Power<u32> for u32 {
+    type Output = u32;
+
+    fn power(&self, exp: u32) -> u32 {
+        self.pow(exp)
+    }
+}
+// When exp is &u32, we need to deref it!
+impl Power<&u32> for u32 {
+    type Output = u32;
+
+    fn power(&self, exp: &u32) -> u32 {
+        self.pow(*exp)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Power;
