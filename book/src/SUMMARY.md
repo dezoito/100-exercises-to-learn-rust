@@ -1,9 +1,11 @@
 # Summary
 
 - [Welcome](01_intro/00_welcome.md)
+
   - [Syntax](01_intro/01_syntax.md)
 
 - [A Basic Calculator](02_basic_calculator/00_intro.md)
+
   - [Integers](02_basic_calculator/01_integers.md)
   - [Variables](02_basic_calculator/02_variables.md)
   - [Branching: `if`/`else`](02_basic_calculator/03_if_else.md)
@@ -16,6 +18,7 @@
   - [Conversions: `as` casting](02_basic_calculator/10_as_casting.md)
 
 - [Ticket v1](03_ticket_v1/00_intro.md)
+
   - [Structs](03_ticket_v1/01_struct.md)
   - [Validation](03_ticket_v1/02_validation.md)
   - [Modules](03_ticket_v1/03_modules.md)
@@ -30,6 +33,7 @@
   - [Outro](03_ticket_v1/12_outro.md)
 
 - [Traits](04_traits/00_intro.md)
+
   - [Trait](04_traits/01_trait.md)
   - [Orphan rule](04_traits/02_orphan_rule.md)
   - [Operator overloading](04_traits/03_operator_overloading.md)
@@ -46,6 +50,7 @@
   - [Outro](04_traits/14_outro.md)
 
 - [Ticket v2](05_ticket_v2/00_intro.md)
+
   - [Enums](05_ticket_v2/01_enum.md)
   - [Branching: `match`](05_ticket_v2/02_match.md)
   - [Variants with data](05_ticket_v2/03_variants_with_data.md)
@@ -63,6 +68,7 @@
   - [Outro](05_ticket_v2/15_outro.md)
 
 - [Ticket Management](06_ticket_management/00_intro.md)
+
   - [Arrays](06_ticket_management/01_arrays.md)
   - [Vectors](06_ticket_management/02_vec.md)
   - [Resizing](06_ticket_management/03_resizing.md)
@@ -81,6 +87,7 @@
   - [`BTreeMap`](06_ticket_management/16_btreemap.md)
 
 - [Threads](07_threads/00_intro.md)
+
   - [Threads](07_threads/01_threads.md)
   - [`'static` lifetime](07_threads/02_static.md)
   - [Leaking memory](07_threads/03_leak.md)
@@ -107,3 +114,5 @@
   - [Outro](08_futures/08_outro.md)
 
 * [Going further](going_further.md)
+
+
