@@ -36,7 +36,19 @@ impl Ticket {
         }
     }
     pub fn assigned_to(&self) -> Option<&String> {
-        todo!()
+        // Answer using if let:
+        // * IMPORTANTE: we use the "assigned_to" value stored in the
+        // * InProgress enum, we never store it in the Ticket structß
+        if let Status::InProgress { assigned_to } = &self.status {
+            return Some(assigned_to);
+        }
+        None
+
+        // Official answer using match
+        // match &self.status {
+        //     Status::InProgress { assigned_to } => Some(assigned_to),
+        //     _ => None,
+        // }
     }
 }
 
