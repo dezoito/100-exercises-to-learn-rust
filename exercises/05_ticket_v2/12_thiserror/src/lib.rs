@@ -6,8 +6,6 @@
 // * Imported this error (after cargo adding it)
 // * Added strings with error descriptions to each variant
 
-use thiserror;
-
 #[derive(thiserror::Error, Debug)]
 enum TicketNewError {
     #[error("Title cannot be empty")]

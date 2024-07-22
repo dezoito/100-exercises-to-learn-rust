@@ -8,6 +8,42 @@ enum Status {
     Done,
 }
 
+// First we need to implement a custom error for the
+// failed status conversions
+#[derive(Debug, thiserror::Error)]
+#[error("{invalid_status} is not a valid status")]
+struct ParseStatusError {
+    invalid_status: String,
+}
+
+// comversion from String
+impl TryFrom<String> for Status {
+    type Error = ParseStatusError;
+
+    // We are going to cast the value as str and use the next conversion function
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        value.as_str().try_into()
+    }
+}
+
+// comversion from &str
+// this is the effective conversion implementation
+impl TryFrom<&str> for Status {
+    type Error = ParseStatusError;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        // converts the imputs to lowercase and returns the corresponding enum variants
+        match value.to_lowercase().as_str() {
+            "todo" => Ok(Status::ToDo),
+            "inprogress" => Ok(Status::InProgress),
+            "done" => Ok(Status::Done),
+            _ => Err(ParseStatusError {
+                invalid_status: value.to_string(),
+            }),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
