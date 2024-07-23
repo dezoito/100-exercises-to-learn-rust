@@ -2,7 +2,54 @@
 //   enforcing that the title is not empty and is not longer than 50 characters.
 //   Implement the traits required to make the tests pass too.
 
+#[derive(Debug, Clone, PartialEq)]
 pub struct TicketTitle(String);
+
+// First we use an enum to represent the possible errors for the title
+#[derive(Debug, thiserror::Error)]
+pub enum TicketTitleError {
+    #[error("The title cannot be empty")]
+    Empty,
+    #[error("The title cannot be longer than 50 bytes")]
+    TooLong,
+}
+
+// We implement the `TryFrom` trait for both `String` (and later &str)
+// notice that validate returns a TicketTitileError
+// and how we handle that here.
+impl TryFrom<&str> for TicketTitle {
+    type Error = TicketTitleError;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        validate(value)?;
+        Ok(Self(value.to_string()))
+    }
+}
+
+// In this case, we use try to cast as &str and take
+// advantage of the implementation above
+impl TryFrom<String> for TicketTitle {
+    type Error = TicketTitleError;
+
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        value.as_str().try_into()
+
+        // Instead of:
+        // validate(&value)?;
+        // Ok(Self(value))
+    }
+}
+
+// Common validation function
+fn validate(title: &str) -> Result<(), TicketTitleError> {
+    if title.is_empty() {
+        Err(TicketTitleError::Empty)
+    } else if title.len() > 50 {
+        Err(TicketTitleError::TooLong)
+    } else {
+        Ok(())
+    }
+}
 
 #[cfg(test)]
 mod tests {
