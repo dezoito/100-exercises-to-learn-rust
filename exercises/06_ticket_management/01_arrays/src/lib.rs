@@ -22,12 +22,29 @@ impl WeekTemperatures {
         }
     }
 
+    // get the index for the selected day
+    // then get the value stored for that index
     pub fn get_temperature(&self, day: Weekday) -> Option<i32> {
-        todo!()
+        self.temperatures[get_index(day)]
     }
 
+    // get the index for the selected day and set the temp
+    // at the corresponding array position
     pub fn set_temperature(&mut self, day: Weekday, temperature: i32) {
-        todo!()
+        self.temperatures[get_index(day)] = Some(temperature);
+    }
+}
+
+// matches day of the week with an int for indexing
+fn get_index(day: Weekday) -> usize {
+    match day {
+        Weekday::Monday => 0,
+        Weekday::Tuesday => 1,
+        Weekday::Wednesday => 2,
+        Weekday::Thursday => 3,
+        Weekday::Friday => 4,
+        Weekday::Saturday => 5,
+        Weekday::Sunday => 6,
     }
 }
 
