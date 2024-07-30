@@ -33,7 +33,8 @@ impl TicketStore {
         self.tickets.push(ticket);
     }
 
-    pub fn to_dos(&mut self) -> Vec<&Ticket> {
+    // See notes for why .iter() was used instead of into_iter()
+    pub fn to_dos(&self) -> Vec<&Ticket> {
         self.tickets
             .iter()
             .filter(|&ticket| ticket.status == Status::ToDo)
