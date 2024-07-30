@@ -40,6 +40,9 @@ impl TicketStore {
     // pub fn iter(&self) -> std::slice::Iter<Ticket> {
     //     self.tickets.iter()
     // }
+
+    // see https://chatgpt.com/c/699e09c6-fb6b-4ebd-9f18-2b20c231d727
+    // for notes on both approaches
 }
 
 #[cfg(test)]

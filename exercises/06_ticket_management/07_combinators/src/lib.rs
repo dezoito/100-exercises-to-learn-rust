@@ -22,6 +22,7 @@ pub enum Status {
 }
 
 impl TicketStore {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
         Self {
             tickets: Vec::new(),
@@ -30,6 +31,13 @@ impl TicketStore {
 
     pub fn add_ticket(&mut self, ticket: Ticket) {
         self.tickets.push(ticket);
+    }
+
+    pub fn to_dos(&mut self) -> Vec<&Ticket> {
+        self.tickets
+            .iter()
+            .filter(|&ticket| ticket.status == Status::ToDo)
+            .collect::<Vec<&Ticket>>()
     }
 }
 

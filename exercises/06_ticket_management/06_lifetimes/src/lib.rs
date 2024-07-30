@@ -22,6 +22,7 @@ pub struct Ticket {
     pub status: Status,
 }
 
+#[allow(clippy::new_without_default)]
 #[derive(Clone, Debug, Copy, PartialEq)]
 pub enum Status {
     ToDo,
