@@ -38,14 +38,30 @@ pub enum Status {
 }
 
 impl TicketStore {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
         Self {
             tickets: Vec::new(),
         }
     }
 
-    pub fn add_ticket(&mut self, ticket: Ticket) {
+    // * we accept a TicketDraft, but add a proper Ticket to the store.
+    pub fn add_ticket(&mut self, ticket_draft: TicketDraft) -> TicketId {
+        let count: u64 = self.tickets.len() as u64;
+        let id = count + 1;
+        let ticket = Ticket {
+            id: TicketId(id),
+            title: ticket_draft.title,
+            description: ticket_draft.description,
+            status: Status::ToDo,
+        };
         self.tickets.push(ticket);
+        TicketId(id)
+    }
+
+    // * return an Option as the ticket may not exist
+    pub fn get(&self, id: TicketId) -> Option<&Ticket> {
+        self.tickets.iter().find(|ticket| ticket.id == id)
     }
 }
 
