@@ -13,7 +13,7 @@ pub struct TicketStore {
     counter: u64,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct TicketId(u64);
 
 #[derive(Clone, Debug, PartialEq)]
@@ -38,9 +38,10 @@ pub enum Status {
 }
 
 impl TicketStore {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
         Self {
-            tickets: todo!(),
+            tickets: BTreeMap::new(),
             counter: 0,
         }
     }
@@ -54,16 +55,29 @@ impl TicketStore {
             description: ticket.description,
             status: Status::ToDo,
         };
-        todo!();
+        self.tickets.insert(id, ticket);
         id
     }
 
     pub fn get(&self, id: TicketId) -> Option<&Ticket> {
-        todo!()
+        self.tickets.get(&id)
     }
 
     pub fn get_mut(&mut self, id: TicketId) -> Option<&mut Ticket> {
-        todo!()
+        self.tickets.get_mut(&id)
+    }
+}
+
+impl<'a> IntoIterator for &'a TicketStore {
+    // * define the type for the individual item
+    type Item = &'a Ticket;
+
+    // * define the type of what we iterate over
+    type IntoIter = std::collections::btree_map::Values<'a, TicketId, Ticket>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        // * use values because we are returning v, not {k,v}
+        self.tickets.values()
     }
 }
 
@@ -106,7 +120,7 @@ mod tests {
 
         let n_tickets = 5;
 
-        for i in 0..n_tickets {
+        for _i in 0..n_tickets {
             let draft = TicketDraft {
                 title: ticket_title(),
                 description: ticket_description(),
