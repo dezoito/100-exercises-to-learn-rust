@@ -23,6 +23,8 @@ pub fn sum(v: Vec<i32>) -> i32 {
     // let mid = v.len() / 2;
     // let (v1, v2) = v.split_at(mid);
 
+    // * The move || in the thread::spawn calls is necessary to transfer
+    // * ownership of the data from the current scope to the new threads.
     let first_handle = thread::spawn(move || first.into_iter().sum::<i32>());
     let rest_handle = thread::spawn(move || rest.into_iter().sum::<i32>());
 
