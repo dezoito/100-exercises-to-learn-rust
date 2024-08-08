@@ -1,6 +1,6 @@
 // TODO: Implement `IndexMut<&TicketId>` and `IndexMut<TicketId>` for `TicketStore`.
 
-use std::ops::Index;
+use std::ops::{Index, IndexMut};
 use ticket_fields::{TicketDescription, TicketTitle};
 
 #[derive(Clone)]
@@ -34,6 +34,7 @@ pub enum Status {
 }
 
 impl TicketStore {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
         Self {
             tickets: Vec::new(),
@@ -72,6 +73,26 @@ impl Index<&TicketId> for TicketStore {
 
     fn index(&self, index: &TicketId) -> &Self::Output {
         &self[*index]
+    }
+}
+
+// * IndeMut does NOT accept a type Output
+impl IndexMut<TicketId> for TicketStore {
+    // type Output = Ticket;
+
+    fn index_mut(&mut self, index: TicketId) -> &mut Self::Output {
+        // * notice we use inter_mut() here
+        self.tickets.iter_mut().find(|t| t.id == index).unwrap()
+    }
+}
+
+// * again, we reuse the previous implementation, passing a val for TicketId
+// * in this case we return a mutable reference to the ticket
+impl IndexMut<&TicketId> for TicketStore {
+    // type Output = Ticket;
+
+    fn index_mut(&mut self, index: &TicketId) -> &mut Self::Output {
+        &mut self[*index]
     }
 }
 
