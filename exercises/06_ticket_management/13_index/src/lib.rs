@@ -1,5 +1,7 @@
 // TODO: Implement `Index<&TicketId>` and `Index<TicketId>` for `TicketStore`.
 
+use std::ops::Index;
+
 use ticket_fields::{TicketDescription, TicketTitle};
 
 #[derive(Clone)]
@@ -33,6 +35,7 @@ pub enum Status {
 }
 
 impl TicketStore {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
         Self {
             tickets: Vec::new(),
@@ -55,6 +58,34 @@ impl TicketStore {
 
     pub fn get(&self, id: TicketId) -> Option<&Ticket> {
         self.tickets.iter().find(|&t| t.id == id)
+    }
+}
+
+// * We accept a TicketId and return a Ticket
+impl Index<TicketId> for TicketStore {
+    type Output = Ticket;
+
+    fn index(&self, index: TicketId) -> &Self::Output {
+        self.tickets
+            .iter()
+            .find(|&ticket| ticket.id == index)
+            .unwrap() // ticket here is an option, panic if it's None
+    }
+}
+
+impl Index<&TicketId> for TicketStore {
+    type Output = Ticket;
+
+    fn index(&self, index: &TicketId) -> &Self::Output {
+        // * this works
+        // self.tickets
+        //     .iter()
+        //     .find(|&ticket| ticket.id == *index)
+        //     .unwrap() // ticket here is an option, panic if it's None
+
+        // * official solution
+        // * It uses the previous implementation!
+        &self[*index] // index is a ref, so deref to get the Id
     }
 }
 
