@@ -20,4 +20,8 @@ pub fn launch() -> Sender<Command> {
 //  Enter a loop: wait for a command to show up in
 //  the channel, then execute it, then start waiting
 //  for the next command.
-pub fn server(receiver: Receiver<Command>) {}
+pub fn server(receiver: Receiver<Command>) {
+    loop {
+        let sender = launch();
+    }
+}
