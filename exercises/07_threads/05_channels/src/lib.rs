@@ -1,10 +1,12 @@
 use std::sync::mpsc::{Receiver, Sender};
 
+use data::TicketDraft;
+
 pub mod data;
 pub mod store;
 
 pub enum Command {
-    Insert(todo!()),
+    Insert(TicketDraft),
 }
 
 // Start the system by spawning the server the thread.
