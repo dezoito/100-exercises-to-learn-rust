@@ -29,6 +29,9 @@ mod tests {
     #[test]
     fn it_works() {
         let counter = Rc::new(RefCell::new(0));
+        // DropTracker is dropped immediately, hence count = 1
+        // We clone the counter for the second arg as it has to be
+        // an instance of a Rc<RefCell<T>>
         let _ = DropTracker::new((), Rc::clone(&counter));
         assert_eq!(*counter.borrow(), 1);
     }
@@ -37,6 +40,7 @@ mod tests {
     fn multiple() {
         let counter = Rc::new(RefCell::new(0));
 
+        // both instances are dropped here
         {
             let a = DropTracker::new(5, Rc::clone(&counter));
             let b = DropTracker::new(6, Rc::clone(&counter));
