@@ -47,6 +47,9 @@ pub fn server(receiver: Receiver<Command>) {
             }) => {
                 // * get the ticket id and send it though the channel
                 // * let _ is required by the compiler
+                // *
+                // * The responses are processed in the caller with
+                // * let my_data = response_receiver.recv().urwrap() (or a match)
                 let id = store.add_ticket(draft);
                 let _ = response_sender.send(id);
             }
