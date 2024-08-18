@@ -18,7 +18,6 @@ pub struct TicketStoreClient {
     sender: SyncSender<Command>,
 }
 
-impl TicketStoreClient {
 // * we now have to map errors and return a Result (try_send can err)
 impl TicketStoreClient {
     pub fn insert(&self, draft: TicketDraft) -> Result<TicketId, OverloadedError> {
