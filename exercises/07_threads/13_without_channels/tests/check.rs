@@ -7,7 +7,8 @@ use without_channels::store::TicketStore;
 
 #[test]
 fn works() {
-    let store = todo!();
+    // * store is just a new TicketStore wrapped in Arc and RwLock
+    let store = Arc::new(RwLock::new(TicketStore::new()));
 
     let store1 = store.clone();
     let client1 = spawn(move || {

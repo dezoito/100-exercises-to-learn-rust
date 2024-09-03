@@ -13,6 +13,7 @@ pub struct TicketStore {
 }
 
 impl TicketStore {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
         Self {
             tickets: BTreeMap::new(),
