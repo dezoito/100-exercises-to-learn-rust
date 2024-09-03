@@ -1,17 +1,18 @@
 use crate::data::{Status, Ticket, TicketDraft};
 use std::collections::BTreeMap;
-use std::sync::{Arc, Mutex};
+use std::sync::{Arc, RwLock};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct TicketId(u64);
 
 #[derive(Clone)]
 pub struct TicketStore {
-    tickets: BTreeMap<TicketId, Arc<Mutex<Ticket>>>,
+    tickets: BTreeMap<TicketId, Arc<RwLock<Ticket>>>,
     counter: u64,
 }
 
 impl TicketStore {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
         Self {
             tickets: BTreeMap::new(),
@@ -28,14 +29,14 @@ impl TicketStore {
             description: ticket.description,
             status: Status::ToDo,
         };
-        let ticket = Arc::new(Mutex::new(ticket));
+        let ticket = Arc::new(RwLock::new(ticket));
         self.tickets.insert(id, ticket);
         id
     }
 
     // The `get` method should return a handle to the ticket
     // which allows the caller to either read or modify the ticket.
-    pub fn get(&self, id: TicketId) -> Option<Arc<Mutex<Ticket>>> {
+    pub fn get(&self, id: TicketId) -> Option<Arc<RwLock<Ticket>>> {
         self.tickets.get(&id).cloned()
     }
 }
