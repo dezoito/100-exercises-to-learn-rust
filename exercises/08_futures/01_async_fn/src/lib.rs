@@ -18,7 +18,7 @@ pub async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
         let (mut sock, _) = listener.accept().await?;
         tokio::spawn(async move {
             let (mut reader, mut writer) = sock.split();
-            // * “`copy` is an asynchronous function that continuously
+            // * `copy` is an asynchronous function that continuously
             // * reads data from the `reader` and writes it to the `writer`.”
             copy(&mut reader, &mut writer).await.unwrap();
         });
