@@ -10,7 +10,13 @@ fn spawner() {
 }
 
 async fn example() {
-    let non_send = Rc::new(1);
+    {
+        let non_send = Rc::new(1);
+        println!("{}", non_send);
+    }
+
+    // * to solve the problem we moved the rest of the code to
+    // * an inner scope and kept the yield out of it.
+    // todo: why?
     yield_now().await;
-    println!("{}", non_send);
 }
