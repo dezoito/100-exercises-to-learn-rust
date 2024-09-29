@@ -49,7 +49,7 @@ mod tests {
                 payload: "pong".into(),
                 response_channel: response_sender,
             })
-            .await // * added await cousa this is async now
+            .await // * added await couse this is async now
             .unwrap();
 
         tokio::spawn(pong(receiver));
