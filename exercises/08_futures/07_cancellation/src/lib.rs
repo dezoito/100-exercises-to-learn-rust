@@ -47,9 +47,9 @@ mod tests {
         let buffered = handle.await.unwrap();
         let buffered = std::str::from_utf8(&buffered).unwrap();
         // * we changed the second arg to hefrthta, since, for
-        // * each string on the messages vec, only the first two
+        // * each string on the messages vec, only the first half
         // * would be returned (the rest of the string would be
         // * dropped due to the timeout)
-        assert_eq!(buffered, "hefrthta");
+        assert_eq!(buffered, "htfrthta");
     }
 }
